@@ -18,29 +18,42 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <!-- Review Schema Markup (Google reads this, hidden to visitors) -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Cozy Nest Apartment",
+  "image": "https://subtle-mooncake-f5183a.netlify.app/logo.jpeg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Your Street Name",
+    "addressLocality": "Ambala",
+    "addressRegion": "HR",
+    "postalCode": "133001",
+    "addressCountry": "IN"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "reviewCount": "15"
+  },
+  "review": [
     {
-      "@context": "https://schema.org",
-      "@type": "ApartmentComplex",
-      "name": "Cozy Nest Apartment",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.7",
-        "reviewCount": "15"
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Guest User"
       },
-      "review": [
-        {
-          "@type": "Review",
-          "author": "Guest User",
-          "datePublished": "2026-06-25",
-          "reviewBody": "Lovely stay, clean rooms and friendly service.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5"
-          }
-        }
-      ]
+      "datePublished": "2026-06-25",
+      "reviewBody": "Lovely stay, clean rooms and friendly service.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      }
     }
-    </script>
+  ]
+}
+</script>
 </head>
 <body>
     <!-- HEADER -->
@@ -328,6 +341,7 @@
         <a href="#home">Back to Top</a>
     </footer>
     <!-- Local Script (Runs last, once EmailJS is fully defined) -->
+     
     <script src="script.js"></script>
 </body>
 </html>
