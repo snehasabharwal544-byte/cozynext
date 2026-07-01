@@ -762,3 +762,7 @@ h2 {
         text-align: center;
     }
 }
+/* Color chosen stars gold */
+.star.selected {
+    color: var(--gold) !important;
+}
