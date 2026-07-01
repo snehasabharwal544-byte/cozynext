@@ -487,7 +487,7 @@ h2 {
     font-style: italic;
 }
 /* Review Form Styling */
-.review-form-container {
+/* .review-form-container {
     background: var(--paper);
     padding: 40px;
     border-radius: 12px;
@@ -556,7 +556,210 @@ h2 {
     margin-top: 15px;
     font-size: 14px;
     text-align: center;
+} */
+/* Core resetting and background layout setup */
+body {
+  background-color: #fcfbf9; /* Warm off-white background */
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 40px 20px;
+  color: #2d3748;
 }
+
+/* Container creating the split side-by-side design layout */
+.review-page-wrapper {
+  max-width: 1000px;
+  margin: 0 auto 60px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+@media (max-width: 768px) {
+  .review-page-wrapper {
+    grid-template-columns: 1fr;
+    padding: 30px 20px;
+    gap: 30px;
+  }
+}
+
+/* Left side branding styles */
+.review-branding-side .tagline {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #c86a3b;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.review-branding-side h1 {
+  font-size: 36px;
+  color: #1a202c;
+  line-height: 1.2;
+  margin: 0 0 16px 0;
+}
+
+.review-branding-side .description {
+  font-size: 15px;
+  color: #718096;
+  line-height: 1.6;
+}
+
+/* Form block control wrappers styling */
+.form-group {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+/* Premium input and form focus field layouts */
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #2d3748;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #c86a3b;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(200, 106, 59, 0.1);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* 5-Star interactive module UI styling */
+.star-rating {
+  display: flex;
+  gap: 6px;
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star {
+  color: #e2e8f0;
+  transition: transform 0.1s ease, color 0.1s ease;
+}
+
+.star:hover {
+  transform: scale(1.1);
+}
+
+.star.selected,
+.star.hover {
+  color: #d69e2e; /* Classic solid golden yellow colors */
+}
+
+/* Theme primary CTA submit action button */
+.submit-btn {
+  width: 100%;
+  background-color: #c86a3b; /* Exact terracotta tone from booking screen */
+  color: #ffffff;
+  padding: 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #b0592e;
+}
+
+/* Dynamic guest cards presentation styling layer */
+.reviews-feed-section {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.reviews-feed-section h2 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+#reviewsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 20px;
+}
+
+.review-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+}
+
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.review-card-name {
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.review-card-stars {
+  color: #d69e2e;
+  font-size: 16px;
+}
+
+.review-card-date {
+  font-size: 12px;
+  color: #a0aec0;
+  margin-bottom: 12px;
+}
+
+.review-card-text {
+  font-style: italic;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* BOOKING SECTION */
 .booking-section {
     background: #f4f1ea;

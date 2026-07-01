@@ -137,116 +137,247 @@ if (galleryImages.length && lightbox && lightboxImg) {
   });
 }
 // REVIEWS & RATING FORM
-const stars = document.querySelectorAll('.star');
- const ratingInput = document.getElementById('rating-value');
- let selectedRating = 0;
- if (stars.length) {
-   // Highlight stars based on index
-   const highlightStars = (count) => {
-     stars.forEach((star, index) => {
-       if (index < count) {
-         star.classList.add('selected');
-       } else {
-         star.classList.remove('selected');
-      }
-     });
-   };
-   // Attach event listeners
-   stars.forEach((star, index) => {
-     // Hover highlight
-     star.addEventListener('mouseover', () => {
-       highlightStars(index + 1);
-     });
-    //  Remove hover highlight (restore current selection)
-     star.addEventListener('mouseout', () => {
-  highlightStars(selectedRating);
-     });     // Save selection
-star.addEventListener('click', () => {
-         selectedRating = index + 1;
-       if (ratingInput) {
-         ratingInput.value = selectedRating;
-       }
-       highlightStars(selectedRating);
-     });
-   });
-}
-// // EMAILJS REVIEW SUBMITTER
- const reviewForm = document.getElementById("reviewForm");
- const confirmation = document.getElementById("confirmation");
-//  Check if EmailJS is available in the window
-  if (typeof emailjs !== 'undefined') {
-   // Initialize EmailJS with your Public Key
-   emailjs.init("nOk9PO4Pqdk5Q3EfN");
-   }
- if (reviewForm) {
-   reviewForm.addEventListener("submit", function(e) {
-     e.preventDefault();
-     if (selectedRating === 0) {
-       if (confirmation) {
-         confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
-         confirmation.style.color = "#c66b3d";
-       }
-       return;
-     }
-     if (typeof emailjs === 'undefined') {
-       console.error("EmailJS SDK failed to load.");
-       if (confirmation) {
-         confirmation.textContent = "❌ Service temporarily unavailable. Please try again later.";
-         confirmation.style.color = "red";
-       }
-       return;    
-       }
-//     // --- EMAILJS SERVICE & TEMPLATE CREDENTIALS ---
-    // IMPORTANT: Replace the values below with your Service ID and Template ID from the EmailJS Dashboard
-const SERVICE_ID = "service_whe21va";   // Replace with e.g. "service_gmail"
-    const TEMPLATE_ID = "template_gl2ceml"; // Replace with your template ID
+// const stars = document.querySelectorAll('.star');
+//  const ratingInput = document.getElementById('rating-value');
+//  let selectedRating = 0;
+//  if (stars.length) {
+//    // Highlight stars based on index
+//    const highlightStars = (count) => {
+//      stars.forEach((star, index) => {
+//        if (index < count) {
+//          star.classList.add('selected');
+//        } else {
+//          star.classList.remove('selected');
+//       }
+//      });
+//    };
+//    // Attach event listeners
+//    stars.forEach((star, index) => {
+//      // Hover highlight
+//      star.addEventListener('mouseover', () => {
+//        highlightStars(index + 1);
+//      });
+//     //  Remove hover highlight (restore current selection)
+//      star.addEventListener('mouseout', () => {
+//   highlightStars(selectedRating);
+//      });     // Save selection
+// star.addEventListener('click', () => {
+//          selectedRating = index + 1;
+//        if (ratingInput) {
+//          ratingInput.value = selectedRating;
+//        }
+//        highlightStars(selectedRating);
+//      });
+//    });
+// }
+// // // EMAILJS REVIEW SUBMITTER
+//  const reviewForm = document.getElementById("reviewForm");
+//  const confirmation = document.getElementById("confirmation");
+// //  Check if EmailJS is available in the window
+//   if (typeof emailjs !== 'undefined') {
+//    // Initialize EmailJS with your Public Key
+//    emailjs.init("nOk9PO4Pqdk5Q3EfN");
+//    }
+//  if (reviewForm) {
+//    reviewForm.addEventListener("submit", function(e) {
+//      e.preventDefault();
+//      if (selectedRating === 0) {
+//        if (confirmation) {
+//          confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
+//          confirmation.style.color = "#c66b3d";
+//        }
+//        return;
+//      }
+//      if (typeof emailjs === 'undefined') {
+//        console.error("EmailJS SDK failed to load.");
+//        if (confirmation) {
+//          confirmation.textContent = "❌ Service temporarily unavailable. Please try again later.";
+//          confirmation.style.color = "red";
+//        }
+//        return;    
+//        }
+// //     // --- EMAILJS SERVICE & TEMPLATE CREDENTIALS ---
+//     // IMPORTANT: Replace the values below with your Service ID and Template ID from the EmailJS Dashboard
+// const SERVICE_ID = "service_whe21va";   // Replace with e.g. "service_gmail"
+//     const TEMPLATE_ID = "template_gl2ceml"; // Replace with your template ID
     
-    // DEMO FALLBACK: If service/template ID is still set to placeholder, simulate success
-    if (SERVICE_ID === "service_whe21va" || TEMPLATE_ID === "ttemplate_gl2ceml") {
-    console.warn("EmailJS is in demo/preview mode. Please configure SERVICE_ID and TEMPLATE_ID inside script.js.");
+//     // DEMO FALLBACK: If service/template ID is still set to placeholder, simulate success
+//     if (SERVICE_ID === "service_whe21va" || TEMPLATE_ID === "ttemplate_gl2ceml") {
+//     console.warn("EmailJS is in demo/preview mode. Please configure SERVICE_ID and TEMPLATE_ID inside script.js.");
       
-      if (confirmation) {       confirmation.textContent = "✅ Thank you! Your review was recorded successfully (Demo Mode).";
-confirmation.style.color = "green";      }
+//       if (confirmation) {       confirmation.textContent = "✅ Thank you! Your review was recorded successfully (Demo Mode).";
+// confirmation.style.color = "green";      }
       
-       // Reset the form
-       reviewForm.reset();
-       selectedRating = 0;
-       if (ratingInput) ratingInput.value = 0;       stars.forEach(s => s.classList.remove('selected'));
+//        // Reset the form
+//        reviewForm.reset();
+//        selectedRating = 0;
+//        if (ratingInput) ratingInput.value = 0;       stars.forEach(s => s.classList.remove('selected'));
       
-      setTimeout(() => {
-         if (confirmation) confirmation.textContent = "";
-       }, 5000);
+//       setTimeout(() => {
+//          if (confirmation) confirmation.textContent = "";
+//        }, 5000);
       
-       return;
-     }
-     // Real EmailJS Send Trigger
-     if (confirmation) {
-       confirmation.textContent = "⌛ Sending your review...";
-       confirmation.style.color = "var(--muted)";
-     }
- emailjs.sendForm(service_whe21va, template_gl2ceml, this)       .then(() => {
-        if (confirmation) {
-           confirmation.textContent = "✅ Thank you! Your review was sent to our email.";
-           confirmation.style.color = "green";
-       }
+//        return;
+//      }
+//      // Real EmailJS Send Trigger
+//      if (confirmation) {
+//        confirmation.textContent = "⌛ Sending your review...";
+//        confirmation.style.color = "var(--muted)";
+//      }
+//  emailjs.sendForm(service_whe21va, template_gl2ceml, this)       .then(() => {
+//         if (confirmation) {
+//            confirmation.textContent = "✅ Thank you! Your review was sent to our email.";
+//            confirmation.style.color = "green";
+//        }
         
-         // Reset inputs
-         reviewForm.reset();
-         selectedRating = 0;
-         if (ratingInput) ratingInput.value = 0;
-         stars.forEach(s => s.classList.remove('selected'));
+//          // Reset inputs
+//          reviewForm.reset();
+//          selectedRating = 0;
+//          if (ratingInput) ratingInput.value = 0;
+//          stars.forEach(s => s.classList.remove('selected'));
         
-         setTimeout(() => {
-           if (confirmation) confirmation.textContent = "";
-         }, 5000);
-       })
-       .catch(err => {
-         console.error("EmailJS send failed:", err);
-         if (confirmation) {
-           confirmation.textContent = "❌ Error sending review. Please try again.";
-           confirmation.style.color = "red";
-         }
-       });
-   });
- }
-//review part
+//          setTimeout(() => {
+//            if (confirmation) confirmation.textContent = "";
+//          }, 5000);
+//        })
+//        .catch(err => {
+//          console.error("EmailJS send failed:", err);
+//          if (confirmation) {
+//            confirmation.textContent = "❌ Error sending review. Please try again.";
+//            confirmation.style.color = "red";
+//          }
+//        });
+//    });
+//  }
+// //review part
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const stars = document.querySelectorAll(".star");
+  const ratingInput = document.getElementById("ratingValue");
+  const reviewForm = document.getElementById("reviewForm");
+  const reviewsContainer = document.getElementById("reviewsContainer");
+
+  // --- 1. Star Interaction Engine ---
+  stars.forEach((star) => {
+    star.addEventListener("mouseover", function () {
+      highlightStars(this.getAttribute("data-value"));
+    });
+
+    star.addEventListener("mouseout", () => {
+      highlightStars(ratingInput.value);
+    });
+
+    star.addEventListener("click", function () {
+      ratingInput.value = this.getAttribute("data-value");
+      highlightStars(ratingInput.value);
+    });
+  });
+
+  function highlightStars(value) {
+    stars.forEach((star) => {
+      if (parseInt(star.getAttribute("data-value")) <= parseInt(value)) {
+        star.classList.add("selected");
+      } else {
+        star.classList.remove("selected");
+      }
+    });
+  }
+
+  // --- 2. Live Fetch and Display from Supabase ---
+  async function fetchReviews() {
+    const { data: reviews, error } = await supabase
+      .from('reviews')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error("Error drawing database reviews:", error);
+      return;
+    }
+
+    reviewsContainer.innerHTML = ""; // Clean grid container layout
+    
+    reviews.forEach(review => {
+      const date = new Date(review.created_at).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+      
+      const starString = "&#9733;".repeat(review.rating) + "&#9734;".repeat(5 - review.rating);
+
+      const reviewHtml = `
+        <div class="review-card">
+          <div class="review-card-header">
+            <span class="review-card-name">${review.full_name}</span>
+            <span class="review-card-stars">${starString}</span>
+          </div>
+          <div class="review-card-date">${date}</div>
+          <div class="review-card-text">"${review.message}"</div>
+        </div>
+      `;
+      reviewsContainer.insertAdjacentHTML('beforeend', reviewHtml);
+    });
+  }
+
+  // --- 3. Form Submission Handling (Database Insertion & Email Notification) ---
+  reviewForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    
+    const fullName = document.getElementById("fullName").value;
+    const rating = parseInt(ratingInput.value);
+    const message = document.getElementById("reviewMessage").value;
+
+    if (rating === 0) {
+      alert("Please select your star rating before submitting!");
+      return;
+    }
+
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.innerText = "Submitting Review...";
+    submitBtn.disabled = true;
+
+    // Action A: Save inside Supabase Table
+    const { error } = await supabase
+      .from('reviews')
+      .insert([{ full_name: fullName, rating: rating, message: message }]);
+
+    if (error) {
+      alert("Database saving failed. Please check table config.");
+      console.error(error);
+      submitBtn.innerText = "Submit Review";
+      submitBtn.disabled = false;
+      return;
+    }
+
+    // Action B: Fire notification through EmailJS
+    const emailParams = {
+      full_name: fullName,
+      rating: rating,
+      message: message
+    };
+
+    // Replace with your actual dashboard Service ID and Template ID values
+    emailjs.send("Yservice_whe21va", "template_gl2ceml", emailParams)
+      .then(() => {
+        console.log("Email notification generated via EmailJS!");
+      })
+      .catch((emailErr) => {
+        console.error("EmailJS dispatch warning:", emailErr);
+      });
+
+    // Reset layout fields to baseline state
+    submitBtn.innerText = "Submit Review";
+    submitBtn.disabled = false;
+    reviewForm.reset();
+    ratingInput.value = "0";
+    highlightStars(0);
+    
+    // Auto-refresh the dynamic feed section items immediately
+    fetchReviews(); 
+  });
+
+  // Automatically fetch records on page initialization
+  fetchReviews();
+});
+

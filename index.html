@@ -284,14 +284,14 @@
 
 
     <!-- REVIEWS SECTION -->
-        <section class="section reviews-section" id="reviews">
+        <!-- <section class="section reviews-section" id="reviews">
             <div class="section-heading">
                 <p class="eyebrow">Guest Reviews</p>
                 <h2>What Our Guests Say</h2>
             </div>
             <div class="reviews-container">
                 <!-- Existing Reviews List -->
-                <div class="reviews-list">
+                <!-- <div class="reviews-list">
                     <article class="review-card">
                         <div class="review-header">
                             <span class="review-author">Guest User</span>
@@ -308,10 +308,10 @@
                         <p class="review-date">June 18, 2026</p>
                         <p class="review-text">"Ideal for business travel. High-speed Wi-Fi is reliable and the rooms are quiet and comfortable."</p>
                     </article>
-                </div>
+                </div> -->
                 <!-- Review Form -->
                  <!-- <textarea name="review" id="review-text" ...></textarea> -->
-                <div class="star-rating">
+                <!-- <div class="star-rating">
   <span class="star" data-value="1">★</span>
   <span class="star" data-value="2">★</span>
   <span class="star" data-value="3">★</span>
@@ -320,8 +320,8 @@
         <input type="hidden" id="rating-value" value="0">
                         
                         <label for="review-author-name">Full Name</label>
-                        <input type="text" id="review-author-name" name="name" required placeholder="e.g. John Doe">
-                        <label for="review-text">Review Message</label>
+                        <input type="text" id="review-author-name" name="name" required placeholder="e.g. John Doe"> -->
+                        <!-- <label for="review-text">Review Message</label>
                         <textarea name="review" id="review-text" placeholder="Tell others about your experience..." required></textarea>
                         
                         <input type="hidden" name="rating" id="rating-value" value="0">
@@ -331,8 +331,69 @@
                     </form>
                 </div>
             </div>
-        </section>
+        </section> --> -->
+<div class="review-page-wrapper">
+    <div class="review-branding-side">
+      <span class="tagline">GUEST FEEDBACK</span>
+      <h1>Share your experience with Cozy Nest.</h1>
+      <p class="description">Your reviews help us maintain high hospitality standards and assist future travelers in booking their perfect stay.</p>
+    </div>
+
+    <div class="review-card-box">
+      <form id="reviewForm">
+        
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" required placeholder="e.g. John Doe">
+        </div>
+
+        <div class="form-group">
+          <label>Your Rating</label>
+          <div class="star-rating">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+          </div>
+          <input type="hidden" id="ratingValue" name="rating" value="0" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reviewMessage">Review Message</label>
+          <textarea id="reviewMessage" required placeholder="What did you love about your stay? (Cleanliness, service, etc.)"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Submit Review</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="reviews-feed-section">
+    <h2>What Our Guests Say</h2>
+    <div id="reviewsContainer">
+      </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("nOk9P04PqdK5Q3EfN"); // Replace with your EmailJS Public Key
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "fziuukqerteghvxflbxz"; // Replace with your Supabase Project URL
+    const SUPABASE_ANON_KEY = "Ysb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj"; // Replace with your Supabase Anon Key
+    const supabase = Supabase.createClient("SUPABukqerteghvxflbxL", "SUPsb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj");
+  </script>
+
+
+
+
+
+
     <!-- FOOTER -->
+
     <footer class="site-footer">
         <strong>Cozy Nest Apartment</strong>
         <a href="#home">Back to Top</a>
