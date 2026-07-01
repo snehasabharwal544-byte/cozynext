@@ -173,7 +173,7 @@ star.addEventListener('click', () => {
 // // EMAILJS REVIEW SUBMITTER
  const reviewForm = document.getElementById("reviewForm");
  const confirmation = document.getElementById("confirmation");
- Check if EmailJS is available in the window
+//  Check if EmailJS is available in the window
   if (typeof emailjs !== 'undefined') {
    // Initialize EmailJS with your Public Key
    emailjs.init("nOk9PO4Pqdk5Q3EfN");
