@@ -136,429 +136,117 @@ if (galleryImages.length && lightbox && lightboxImg) {
     }
   });
 }
-// // REVIEWS & RATING FORM
-// const stars = document.querySelectorAll('.star');
-// const ratingInput = document.getElementById('rating-value');
-// let selectedRating = 0;
-// if (stars.length) {
-//   // Highlight stars based on index
-//   const highlightStars = (count) => {
-//     stars.forEach((star, index) => {
-//       if (index < count) {
-//         star.classList.add('selected');
-//       } else {
-//         star.classList.remove('selected');
-//       }
-//     });
-//   };
-//   // Attach event listeners
-//   stars.forEach((star, index) => {
-//     // Hover highlight
-//     star.addEventListener('mouseover', () => {
-//       highlightStars(index + 1);
-//     });
-//     // Remove hover highlight (restore current selection)
-//     star.addEventListener('mouseout', () => {
-//       highlightStars(selectedRating);
-//     });
-//     // Save selection
-//     star.addEventListener('click', () => {
-//       selectedRating = index + 1;
-//       if (ratingInput) {
-//         ratingInput.value = selectedRating;
-//       }
-//       highlightStars(selectedRating);
-//     });
-//   });
-// }
+// REVIEWS & RATING FORM
+const stars = document.querySelectorAll('.star');
+ const ratingInput = document.getElementById('rating-value');
+ let selectedRating = 0;
+ if (stars.length) {
+   // Highlight stars based on index
+   const highlightStars = (count) => {
+     stars.forEach((star, index) => {
+       if (index < count) {
+         star.classList.add('selected');
+       } else {
+         star.classList.remove('selected');
+      }
+     });
+   };
+   // Attach event listeners
+   stars.forEach((star, index) => {
+     // Hover highlight
+     star.addEventListener('mouseover', () => {
+       highlightStars(index + 1);
+     });
+    //  Remove hover highlight (restore current selection)
+     star.addEventListener('mouseout', () => {
+  highlightStars(selectedRating);
+     });     // Save selection
+star.addEventListener('click', () => {
+         selectedRating = index + 1;
+       if (ratingInput) {
+         ratingInput.value = selectedRating;
+       }
+       highlightStars(selectedRating);
+     });
+   });
+}
 // // EMAILJS REVIEW SUBMITTER
-// const reviewForm = document.getElementById("reviewForm");
-// const confirmation = document.getElementById("confirmation");
-// // Check if EmailJS is available in the window
-// if (typeof emailjs !== 'undefined') {
-//   // Initialize EmailJS with your Public Key
-//   emailjs.init("nOk9PO4Pqdk5Q3EfN");
-// }
-// if (reviewForm) {
-//   reviewForm.addEventListener("submit", function(e) {
-//     e.preventDefault();
-//     if (selectedRating === 0) {
-//       if (confirmation) {
-//         confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
-//         confirmation.style.color = "#c66b3d";
-//       }
-//       return;
-//     }
-//     if (typeof emailjs === 'undefined') {
-//       console.error("EmailJS SDK failed to load.");
-//       if (confirmation) {
-//         confirmation.textContent = "❌ Service temporarily unavailable. Please try again later.";
-//         confirmation.style.color = "red";
-//       }
-//       return;
-//     }
+ const reviewForm = document.getElementById("reviewForm");
+ const confirmation = document.getElementById("confirmation");
+ Check if EmailJS is available in the window
+  if (typeof emailjs !== 'undefined') {
+   // Initialize EmailJS with your Public Key
+   emailjs.init("nOk9PO4Pqdk5Q3EfN");
+   }
+ if (reviewForm) {
+   reviewForm.addEventListener("submit", function(e) {
+     e.preventDefault();
+     if (selectedRating === 0) {
+       if (confirmation) {
+         confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
+         confirmation.style.color = "#c66b3d";
+       }
+       return;
+     }
+     if (typeof emailjs === 'undefined') {
+       console.error("EmailJS SDK failed to load.");
+       if (confirmation) {
+         confirmation.textContent = "❌ Service temporarily unavailable. Please try again later.";
+         confirmation.style.color = "red";
+       }
+       return;    
+       }
 //     // --- EMAILJS SERVICE & TEMPLATE CREDENTIALS ---
-//     // IMPORTANT: Replace the values below with your Service ID and Template ID from the EmailJS Dashboard
-//     const SERVICE_ID = "service_xxxxxx";  // Replace with e.g. "service_gmail"
-//     const TEMPLATE_ID = "template_xxxxxx"; // Replace with your template ID
+    // IMPORTANT: Replace the values below with your Service ID and Template ID from the EmailJS Dashboard
+const SERVICE_ID = "service_whe21va";   // Replace with e.g. "service_gmail"
+    const TEMPLATE_ID = "template_gl2ceml"; // Replace with your template ID
     
-//     // DEMO FALLBACK: If service/template ID is still set to placeholder, simulate success
-//     if (SERVICE_ID === "service_xxxxxx" || TEMPLATE_ID === "template_xxxxxx") {
-//       console.warn("EmailJS is in demo/preview mode. Please configure SERVICE_ID and TEMPLATE_ID inside script.js.");
+    // DEMO FALLBACK: If service/template ID is still set to placeholder, simulate success
+    if (SERVICE_ID === "service_whe21va" || TEMPLATE_ID === "ttemplate_gl2ceml") {
+    console.warn("EmailJS is in demo/preview mode. Please configure SERVICE_ID and TEMPLATE_ID inside script.js.");
       
-//       if (confirmation) {
-//         confirmation.textContent = "✅ Thank you! Your review was recorded successfully (Demo Mode).";
-//         confirmation.style.color = "green";
-//       }
+      if (confirmation) {       confirmation.textContent = "✅ Thank you! Your review was recorded successfully (Demo Mode).";
+confirmation.style.color = "green";      }
       
-//       // Reset the form
-//       reviewForm.reset();
-//       selectedRating = 0;
-//       if (ratingInput) ratingInput.value = 0;
-//       stars.forEach(s => s.classList.remove('selected'));
+       // Reset the form
+       reviewForm.reset();
+       selectedRating = 0;
+       if (ratingInput) ratingInput.value = 0;       stars.forEach(s => s.classList.remove('selected'));
       
-//       setTimeout(() => {
-//         if (confirmation) confirmation.textContent = "";
-//       }, 5000);
+      setTimeout(() => {
+         if (confirmation) confirmation.textContent = "";
+       }, 5000);
       
-//       return;
-//     }
-//     // Real EmailJS Send Trigger
-//     if (confirmation) {
-//       confirmation.textContent = "⌛ Sending your review...";
-//       confirmation.style.color = "var(--muted)";
-//     }
-//     emailjs.sendForm(service_whe21va, template_gl2ceml, this)
-//       .then(() => {
-//         if (confirmation) {
-//           confirmation.textContent = "✅ Thank you! Your review was sent to our email.";
-//           confirmation.style.color = "green";
-//         }
+       return;
+     }
+     // Real EmailJS Send Trigger
+     if (confirmation) {
+       confirmation.textContent = "⌛ Sending your review...";
+       confirmation.style.color = "var(--muted)";
+     }
+ emailjs.sendForm(service_whe21va, template_gl2ceml, this)       .then(() => {
+        if (confirmation) {
+           confirmation.textContent = "✅ Thank you! Your review was sent to our email.";
+           confirmation.style.color = "green";
+       }
         
-//         // Reset inputs
-//         reviewForm.reset();
-//         selectedRating = 0;
-//         if (ratingInput) ratingInput.value = 0;
-//         stars.forEach(s => s.classList.remove('selected'));
+         // Reset inputs
+         reviewForm.reset();
+         selectedRating = 0;
+         if (ratingInput) ratingInput.value = 0;
+         stars.forEach(s => s.classList.remove('selected'));
         
-//         setTimeout(() => {
-//           if (confirmation) confirmation.textContent = "";
-//         }, 5000);
-//       })
-//       .catch(err => {
-//         console.error("EmailJS send failed:", err);
-//         if (confirmation) {
-//           confirmation.textContent = "❌ Error sending review. Please try again.";
-//           confirmation.style.color = "red";
-//         }
-//       });
-//   });
-// }
-// // // review part
-// // ========================================================
-// // STAR RATINGS LOGIC (CORRECTED)
-// // ========================================================
-// const stars = document.querySelectorAll('.star');
-// const ratingInput = document.getElementById('rating-value');
-// let selectedRating = 0;
-
-// if (stars.length) {
-//   const highlightStars = (count) => {
-//     stars.forEach((star, index) => {
-//       if (index < count) {
-//         star.classList.add('selected');
-//       } else {
-//         star.classList.remove('selected');
-//       }
-//     });
-//   };
-
-//   stars.forEach((star, index) => {
-//     star.addEventListener('mouseover', () => {
-//       highlightStars(index + 1);
-//     });
-//     star.addEventListener('mouseout', () => {
-//       highlightStars(selectedRating);
-//     });
-//     star.addEventListener('click', () => {
-//       selectedRating = index + 1;
-//       if (ratingInput) {
-//         ratingInput.value = selectedRating;
-//       }
-//       highlightStars(selectedRating);
-//     });
-//   });
-// }
-
-// // ========================================================
-// // SUPABASE REAL DATABASE CONNECTIVITY (CORRECTED)
-// // ========================================================
-
-// // 1. Properly initialized URLs with string quotes to prevent system crashes
-// const SUPABASE_URL = "https://fziuukqerteghvxflbxz.supabase.co"; 
-// const SUPABASE_ANON_KEY = "sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj";
-// const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); 
-
-// // 2. Targets the specific form ID (#reviewForm) instead of a generic form
-// const targetReviewForm = document.getElementById('reviewForm'); 
-// const confirmation = document.getElementById("confirmation");
-// const reviewsContainer = document.querySelector('.reviews-list'); 
-
-// if (targetReviewForm) {
-//   targetReviewForm.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-    
-//     // Checks if a star was selected before submitting
-//     if (selectedRating === 0) {
-//       if (confirmation) {
-//         confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
-//         confirmation.style.color = "#c66b3d";
-//       }
-//       return;
-//     }
-
-//     // Matches your exact HTML field IDs from index.html
-//     const userName = document.getElementById('review-author-name').value;
-//     const userMessage = document.getElementById('review-text').value;
-
-//     if (confirmation) {
-//       confirmation.textContent = "⌛ Posting your review...";
-//       confirmation.style.color = "var(--muted)";
-//     }
-
-//     // Sends entry safely to the database table
-//     const { data, error } = await supabase
-//         .from('reviews')
-//         .insert([{ name: userName, message: userMessage, rating: selectedRating }]);
-
-//     if (error) {
-//         alert("Error saving review: " + error.message);
-//         if (confirmation) confirmation.textContent = "";
-//     } else {
-//         if (confirmation) {
-//             confirmation.textContent = "✓ Thank you! Your review was recorded successfully.";
-//             confirmation.style.color = "green";
-//         }
-        
-//         // Fully clears review elements out upon submission completion
-//         targetReviewForm.reset();
-//         selectedRating = 0;
-//         if (ratingInput) ratingInput.value = 0;
-//         stars.forEach(s => s.classList.remove('selected'));
-        
-//         fetchReviews(); // Reloads active page content listing instantly
-        
-//         setTimeout(() => {
-//           if (confirmation) confirmation.textContent = "";
-//         }, 5000);
-//     }
-//   });
-// }
-
-// // 3. Pulls database inputs live to display on webpage layout
-// async function fetchReviews() {
-//     const { data: reviews, error } = await supabase
-//         .from('reviews')
-//         .select('*')
-//         .order('created_at', { ascending: false });
-
-//     if (error) {
-//         console.error("Error fetching reviews:", error);
-//         return;
-//     }
-//     if (!reviewsContainer) return;
-    
-//     reviewsContainer.innerHTML = ''; // Wipes old layout placeholders
-
-//     reviews.forEach(review => {
-//         const starCount = review.rating ? review.rating : 5;
-//         const generatedStars = "★".repeat(starCount) + "☆".repeat(5 - starCount);
-        
-//         const reviewDate = review.created_at ? new Date(review.created_at).toLocaleDateString('en-US', {
-//             month: 'long', day: 'numeric', year: 'numeric'
-//         }) : "Just now";
-
-//         const reviewCard = `
-//             <article class="review-card">
-//                 <div class="review-header">
-//                     <span class="review-author">${review.name}</span>
-//                     <span class="review-stars" style="color: var(--gold);">${generatedStars}</span>
-//                 </div>
-//                 <p class="review-date">${reviewDate}</p>
-//                 <p class="review-text">"${review.message}"</p>
-//             </article>
-//         `;
-//         reviewsContainer.insertAdjacentHTML('beforeend', reviewCard);
-//     });
-// }
-
-// // Loads existing active reviews when browser connects
-// window.addEventListener('DOMContentLoaded', fetchReviews);
-{/* <p class="review-text">"${review.message}"</p> */}
-// ========================================================
-// STAR RATINGS LOGIC (FIXED)
-// ========================================================
-// const stars = document.querySelectorAll('.star');
-// const ratingInput = document.getElementById('rating-value');
-// let selectedRating = 0;
-
-// if (stars.length) {
-//   const highlightStars = (count) => {
-//     stars.forEach((star, index) => {
-//       if (index < count) {
-//         star.classList.add('selected'); // Turns the stars gold based on your CSS
-//       } else {
-//         star.classList.remove('selected');
-//       }
-//     });
-//   };
-
-//   stars.forEach((star, index) => {
-//     star.addEventListener('mouseover', () => highlightStars(index + 1));
-//     star.addEventListener('mouseout', () => highlightStars(selectedRating));
-//     star.addEventListener('click', () => {
-//       selectedRating = index + 1;
-//       if (ratingInput) ratingInput.value = selectedRating;
-//       highlightStars(selectedRating);
-//     });
-//   });
-// }
-
-// ========================================================
-// SUPABASE REAL DATABASE CONNECTIVITY (FIXED)
-// ========================================================
-
-
-// const targetReviewForm = document.getElementById('reviewForm'); 
-// const confirmation = document.getElementById("confirmation");
-// const reviewsContainer = document.querySelector('.reviews-list'); 
-
-// if (targetReviewForm) {
-//   targetReviewForm.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-    
-//     if (selectedRating === 0) {
-//       if (confirmation) {
-//         confirmation.textContent = "Please select a rating score (1 to 5 stars).";
-//         confirmation.style.color = #c66b3d";
-//       }
-//       return;
-//     }
-
-//     const userName = document.getElementById('review-author-name').value;
-//     const userMessage = document.getElementById('review-text').value;
-
-//     if (confirmation) {
-//       confirmation.textContent = " Posting your review...";
-//       confirmation.style.color = "var(--muted)";
-//     }
-
-//     // Stores review values securely into your database
-//     const { data, error } = await supabase
-//         .from('reviews')
-//         .insert([{ name: userName, message: userMessage, rating: selectedRating }]);
-
-//     if (error) {
-//         alert("Error saving review: " + error.message);
-//         if (confirmation) confirmation.textContent = "";
-//     } else {
-//         if (confirmation) {
-//             confirmation.textContent = "✓ Thank you! Your review was recorded successfully.";
-//             confirmation.style.color = "green";
-//         }
-        
-//         // Reset the form values smoothly
-//         targetReviewForm.reset();
-//         selectedRating = 0;
-//         if (ratingInput) ratingInput.value = 0;
-//         stars.forEach(s => s.classList.remove('selected'));
-        
-//         fetchReviews(); // Refresh and show the new review immediately!
-        
-//         setTimeout(() => {
-//           if (confirmation) confirmation.textContent = "";
-//         }, 5000);
-//     }
-//   });
-// }
-
-// // ========================================================
-// // DYNAMIC FETCH LOGIC (FIXED TO DISPLAY TEXT)
-// // ========================================================
-// async function fetchReviews() {
-//     const { data: reviews, error } = await supabase
-//         .from('reviews')
-//         .select('*')
-//         .order('created_at', { ascending: false });
-
-//     if (error) {
-//         console.error("Error fetching reviews:", error);
-//         return;
-//     }
-//     if (!reviewsContainer) return;
-    
-//     reviewsContainer.innerHTML = ''; // Clears static placeholders
-
-//     reviews.forEach(review => {
-//         const starCount = review.rating ? review.rating : 5;
-//         const generatedStars = "★".repeat(starCount) + "☆".repeat(5 - starCount);
-        
-//         const reviewDate = review.created_at ? new Date(review.created_at).toLocaleDateString('en-US', {
-//             month: 'long', day: 'numeric', year: 'numeric'
-//         }) : "Just now";
-
-//         // Ensures text is loaded whether stored under "message" or "review"
-//         const finalMessageText = review.message || review.review || "";
-
-//         const reviewCard = `
-//             <article class="review-card">
-//                 <div class="review-header">
-//                     <span class="review-author">${review.name}</span>
-//                     <span class="review-stars" style="color: var(--gold);">${generatedStars}</span>
-//                 </div>
-//                 <p class="review-date">${reviewDate}</p>
-//                 <p class="review-text">"${finalMessageText}"</p>
-//             </article>
-//         `;
-//         reviewsContainer.insertAdjacentHTML('beforeend', reviewCard);
-//     });
-// }
-
-// // Load reviews directly onto the webpage layout on page load
-// window.addEventListener('DOMContentLoaded', fetchReviews);
-// Listen for when someone clicks your "Submit Review" button
-
-const SUPABASE_URL = "https://fziuukqerteghvxflbxz.supabase.co"; 
-const SUPABASE_ANON_KEY = "sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj";
-const supabase = supabase.createClient("https://fziuukqerteghvxflbxz.supabase.co", "sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj"); 
-
-document.getElementById('submit-review-btn').addEventListener('click', async (event) => {
-  event.preventDefault(); // Stops the page from putting text in the URL bar!
-
-  // 1. Get the values from your input boxes
-  const name = document.getElementById('reviewer-name').value;
-  const message = document.getElementById('review-message').value;
-  const rating = parseInt(document.getElementById('rating-value').value) || 5; // Defaults to 5 stars if not working yet
-
-  // 2. Check if the user left anything empty
-  if (!name || !message) {
-    alert("Please enter your name and a message!");
-    return;
-  }
-
-  // 3. Send it to your Supabase 'reviews' table
-  const { data, error } = await supabase
-    .from('reviews')
-    .insert([{ name: name, message: message, rating: rating }]);
-
-  if (error) {
-    console.error("Something went wrong:", error.message);
-    alert("Error saving review: " + error.message);
-  } else {
-    alert("Success! Your review is saved in Supabase.");
-    
-    // Clear the form boxes so they are empty again
-    document.getElementById('reviewer-name').value = '';
-    document.getElementById('review-message').value = '';
-  }
-});
+         setTimeout(() => {
+           if (confirmation) confirmation.textContent = "";
+         }, 5000);
+       })
+       .catch(err => {
+         console.error("EmailJS send failed:", err);
+         if (confirmation) {
+           confirmation.textContent = "❌ Error sending review. Please try again.";
+           confirmation.style.color = "red";
+         }
+       });
+   });
+ }
+//review part
