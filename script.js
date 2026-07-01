@@ -254,4 +254,71 @@ if (reviewForm) {
       });
   });
 }
+// review part
+// 1. Initialize your connection to Supabase
+const SUPABASE_URL = "https://cozynestapartment.netlify.app/";
+const SUPABASE_ANON_KEY = "sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj";
+const supabase = supabase.createClient(fziuukqerteghvxflbxz, sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj); 
+// 2. Select your HTML elements (Make sure these IDs match your HTML)
+const reviewForm = document.querySelector('form'); 
+const successMessage = document.querySelector('.text-success') || document.getElementById('success-banner');
 
+reviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevents the page from refreshing automatically
+    
+    // Grab the inputs the user typed in (Update these IDs to match your input fields)
+    const userName = document.getElementById('reviewer-name').value;
+    const userMessage = document.getElementById('reviewer-message').value;
+
+    // Send the data straight to your Supabase 'reviews' table
+    const { data, error } = await supabase
+        .from('reviews')
+        .insert([{ name: userName, message: userMessage }]);
+
+    if (error) {
+        alert("Error saving review: " + error.message);
+    } else {
+        // Change the green banner message to get rid of (Demo Mode)
+        if (successMessage) {
+            successMessage.innerHTML = "✓ Thank you! Your review was recorded successfully.";
+            successMessage.style.display = "block";
+        }
+        
+        reviewForm.reset(); // Clears the form text boxes
+        fetchReviews();     // Refresh the list on screen immediately
+    }
+});
+
+
+// 3. Load and display the reviews
+async function fetchReviews() {
+    const { data: reviews, error } = await supabase
+        .from('reviews')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error("Error fetching reviews:", error);
+        return;
+    }
+
+    // Find the container element where reviews are listed on your webpage
+    const reviewsContainer = document.getElementById('reviews-display-area'); 
+    if (!reviewsContainer) return;
+    
+    reviewsContainer.innerHTML = ''; // Clear out any hardcoded template reviews
+
+    // Generate HTML for each review row in your database
+    reviews.forEach(review => {
+        const reviewCard = `
+            <div class="review-item" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <strong>${review.name}</strong>
+                <p>"${review.message}"</p>
+            </div>
+        `;
+        reviewsContainer.insertAdjacentHTML('beforeend', reviewCard);
+    });
+}
+
+// Automatically load existing reviews whenever someone opens the website
+window.addEventListener('DOMContentLoaded', fetchReviews);
