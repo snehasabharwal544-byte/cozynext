@@ -966,3 +966,6 @@ body {
     }
 }
 /* Default state: Grey stars */
+.star.selected {
+    color: #c5a880; /* Or whatever your primary gold color is */
+}

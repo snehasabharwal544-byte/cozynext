@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       // Replace with your actual dashboard Service ID and Template ID values
-      await emailjs.send("Yservice_whe21va", "template_gl2ceml", emailParams)
+      await emailjs.send("service_whe21va", "template_gl2ceml", emailParams)
         .then(() => {
           console.log("Email notification generated via EmailJS!");
         })
@@ -404,3 +404,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Automatically fetch records on page initialization
   fetchReviews();
 });
+const SUPABASE_URL = "https://fziuukqerteghvxflbxz.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6aXV1a3FlcnRlZ2h2eGZsYnh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4NzkwMDksImV4cCI6MjA5ODQ1NTAwOX0.8Ha4jr40Oix5zYZuo02ytpjwVMu_Fpv4avSLs_UmAGA";
+const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
