@@ -394,35 +394,35 @@ if (galleryImages.length && lightbox && lightboxImg) {
 
 // // Loads existing active reviews when browser connects
 // window.addEventListener('DOMContentLoaded', fetchReviews);
-<p class="review-text">"${review.message}"</p>
+{/* <p class="review-text">"${review.message}"</p> */}
 // ========================================================
 // STAR RATINGS LOGIC (FIXED)
 // ========================================================
-const stars = document.querySelectorAll('.star');
-const ratingInput = document.getElementById('rating-value');
-let selectedRating = 0;
+// const stars = document.querySelectorAll('.star');
+// const ratingInput = document.getElementById('rating-value');
+// let selectedRating = 0;
 
-if (stars.length) {
-  const highlightStars = (count) => {
-    stars.forEach((star, index) => {
-      if (index < count) {
-        star.classList.add('selected'); // Turns the stars gold based on your CSS
-      } else {
-        star.classList.remove('selected');
-      }
-    });
-  };
+// if (stars.length) {
+//   const highlightStars = (count) => {
+//     stars.forEach((star, index) => {
+//       if (index < count) {
+//         star.classList.add('selected'); // Turns the stars gold based on your CSS
+//       } else {
+//         star.classList.remove('selected');
+//       }
+//     });
+//   };
 
-  stars.forEach((star, index) => {
-    star.addEventListener('mouseover', () => highlightStars(index + 1));
-    star.addEventListener('mouseout', () => highlightStars(selectedRating));
-    star.addEventListener('click', () => {
-      selectedRating = index + 1;
-      if (ratingInput) ratingInput.value = selectedRating;
-      highlightStars(selectedRating);
-    });
-  });
-}
+//   stars.forEach((star, index) => {
+//     star.addEventListener('mouseover', () => highlightStars(index + 1));
+//     star.addEventListener('mouseout', () => highlightStars(selectedRating));
+//     star.addEventListener('click', () => {
+//       selectedRating = index + 1;
+//       if (ratingInput) ratingInput.value = selectedRating;
+//       highlightStars(selectedRating);
+//     });
+//   });
+// }
 
 // ========================================================
 // SUPABASE REAL DATABASE CONNECTIVITY (FIXED)
@@ -439,8 +439,8 @@ if (stars.length) {
     
 //     if (selectedRating === 0) {
 //       if (confirmation) {
-//         confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
-//         confirmation.style.color = "#c66b3d";
+//         confirmation.textContent = "Please select a rating score (1 to 5 stars).";
+//         confirmation.style.color = #c66b3d";
 //       }
 //       return;
 //     }
@@ -449,7 +449,7 @@ if (stars.length) {
 //     const userMessage = document.getElementById('review-text').value;
 
 //     if (confirmation) {
-//       confirmation.textContent = "⌛ Posting your review...";
+//       confirmation.textContent = " Posting your review...";
 //       confirmation.style.color = "var(--muted)";
 //     }
 
