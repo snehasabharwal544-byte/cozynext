@@ -136,12 +136,133 @@ if (galleryImages.length && lightbox && lightboxImg) {
     }
   });
 }
-// REVIEWS & RATING FORM
+// // REVIEWS & RATING FORM
+// const stars = document.querySelectorAll('.star');
+// const ratingInput = document.getElementById('rating-value');
+// let selectedRating = 0;
+// if (stars.length) {
+//   // Highlight stars based on index
+//   const highlightStars = (count) => {
+//     stars.forEach((star, index) => {
+//       if (index < count) {
+//         star.classList.add('selected');
+//       } else {
+//         star.classList.remove('selected');
+//       }
+//     });
+//   };
+//   // Attach event listeners
+//   stars.forEach((star, index) => {
+//     // Hover highlight
+//     star.addEventListener('mouseover', () => {
+//       highlightStars(index + 1);
+//     });
+//     // Remove hover highlight (restore current selection)
+//     star.addEventListener('mouseout', () => {
+//       highlightStars(selectedRating);
+//     });
+//     // Save selection
+//     star.addEventListener('click', () => {
+//       selectedRating = index + 1;
+//       if (ratingInput) {
+//         ratingInput.value = selectedRating;
+//       }
+//       highlightStars(selectedRating);
+//     });
+//   });
+// }
+// // EMAILJS REVIEW SUBMITTER
+// const reviewForm = document.getElementById("reviewForm");
+// const confirmation = document.getElementById("confirmation");
+// // Check if EmailJS is available in the window
+// if (typeof emailjs !== 'undefined') {
+//   // Initialize EmailJS with your Public Key
+//   emailjs.init("nOk9PO4Pqdk5Q3EfN");
+// }
+// if (reviewForm) {
+//   reviewForm.addEventListener("submit", function(e) {
+//     e.preventDefault();
+//     if (selectedRating === 0) {
+//       if (confirmation) {
+//         confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
+//         confirmation.style.color = "#c66b3d";
+//       }
+//       return;
+//     }
+//     if (typeof emailjs === 'undefined') {
+//       console.error("EmailJS SDK failed to load.");
+//       if (confirmation) {
+//         confirmation.textContent = "❌ Service temporarily unavailable. Please try again later.";
+//         confirmation.style.color = "red";
+//       }
+//       return;
+//     }
+//     // --- EMAILJS SERVICE & TEMPLATE CREDENTIALS ---
+//     // IMPORTANT: Replace the values below with your Service ID and Template ID from the EmailJS Dashboard
+//     const SERVICE_ID = "service_xxxxxx";  // Replace with e.g. "service_gmail"
+//     const TEMPLATE_ID = "template_xxxxxx"; // Replace with your template ID
+    
+//     // DEMO FALLBACK: If service/template ID is still set to placeholder, simulate success
+//     if (SERVICE_ID === "service_xxxxxx" || TEMPLATE_ID === "template_xxxxxx") {
+//       console.warn("EmailJS is in demo/preview mode. Please configure SERVICE_ID and TEMPLATE_ID inside script.js.");
+      
+//       if (confirmation) {
+//         confirmation.textContent = "✅ Thank you! Your review was recorded successfully (Demo Mode).";
+//         confirmation.style.color = "green";
+//       }
+      
+//       // Reset the form
+//       reviewForm.reset();
+//       selectedRating = 0;
+//       if (ratingInput) ratingInput.value = 0;
+//       stars.forEach(s => s.classList.remove('selected'));
+      
+//       setTimeout(() => {
+//         if (confirmation) confirmation.textContent = "";
+//       }, 5000);
+      
+//       return;
+//     }
+//     // Real EmailJS Send Trigger
+//     if (confirmation) {
+//       confirmation.textContent = "⌛ Sending your review...";
+//       confirmation.style.color = "var(--muted)";
+//     }
+//     emailjs.sendForm(service_whe21va, template_gl2ceml, this)
+//       .then(() => {
+//         if (confirmation) {
+//           confirmation.textContent = "✅ Thank you! Your review was sent to our email.";
+//           confirmation.style.color = "green";
+//         }
+        
+//         // Reset inputs
+//         reviewForm.reset();
+//         selectedRating = 0;
+//         if (ratingInput) ratingInput.value = 0;
+//         stars.forEach(s => s.classList.remove('selected'));
+        
+//         setTimeout(() => {
+//           if (confirmation) confirmation.textContent = "";
+//         }, 5000);
+//       })
+//       .catch(err => {
+//         console.error("EmailJS send failed:", err);
+//         if (confirmation) {
+//           confirmation.textContent = "❌ Error sending review. Please try again.";
+//           confirmation.style.color = "red";
+//         }
+//       });
+//   });
+// }
+// // review part
+// ========================================================
+// STAR RATINGS LOGIC (CORRECTED)
+// ========================================================
 const stars = document.querySelectorAll('.star');
 const ratingInput = document.getElementById('rating-value');
 let selectedRating = 0;
+
 if (stars.length) {
-  // Highlight stars based on index
   const highlightStars = (count) => {
     stars.forEach((star, index) => {
       if (index < count) {
@@ -151,17 +272,14 @@ if (stars.length) {
       }
     });
   };
-  // Attach event listeners
+
   stars.forEach((star, index) => {
-    // Hover highlight
     star.addEventListener('mouseover', () => {
       highlightStars(index + 1);
     });
-    // Remove hover highlight (restore current selection)
     star.addEventListener('mouseout', () => {
       highlightStars(selectedRating);
     });
-    // Save selection
     star.addEventListener('click', () => {
       selectedRating = index + 1;
       if (ratingInput) {
@@ -171,17 +289,26 @@ if (stars.length) {
     });
   });
 }
-// EMAILJS REVIEW SUBMITTER
-const reviewForm = document.getElementById("reviewForm");
+
+// ========================================================
+// SUPABASE REAL DATABASE CONNECTIVITY (CORRECTED)
+// ========================================================
+
+// 1. Properly initialized URLs with string quotes to prevent system crashes
+const SUPABASE_URL = "https://fziuukqerteghvxflbxz.supabase.co"; 
+const SUPABASE_ANON_KEY = "sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj";
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); 
+
+// 2. Targets the specific form ID (#reviewForm) instead of a generic form
+const targetReviewForm = document.getElementById('reviewForm'); 
 const confirmation = document.getElementById("confirmation");
-// Check if EmailJS is available in the window
-if (typeof emailjs !== 'undefined') {
-  // Initialize EmailJS with your Public Key
-  emailjs.init("nOk9PO4Pqdk5Q3EfN");
-}
-if (reviewForm) {
-  reviewForm.addEventListener("submit", function(e) {
+const reviewsContainer = document.querySelector('.reviews-list'); 
+
+if (targetReviewForm) {
+  targetReviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // Checks if a star was selected before submitting
     if (selectedRating === 0) {
       if (confirmation) {
         confirmation.textContent = "⚠️ Please select a rating score (1 to 5 stars).";
@@ -189,108 +316,46 @@ if (reviewForm) {
       }
       return;
     }
-    if (typeof emailjs === 'undefined') {
-      console.error("EmailJS SDK failed to load.");
-      if (confirmation) {
-        confirmation.textContent = "❌ Service temporarily unavailable. Please try again later.";
-        confirmation.style.color = "red";
-      }
-      return;
-    }
-    // --- EMAILJS SERVICE & TEMPLATE CREDENTIALS ---
-    // IMPORTANT: Replace the values below with your Service ID and Template ID from the EmailJS Dashboard
-    const SERVICE_ID = "service_xxxxxx";  // Replace with e.g. "service_gmail"
-    const TEMPLATE_ID = "template_xxxxxx"; // Replace with your template ID
-    
-    // DEMO FALLBACK: If service/template ID is still set to placeholder, simulate success
-    if (SERVICE_ID === "service_xxxxxx" || TEMPLATE_ID === "template_xxxxxx") {
-      console.warn("EmailJS is in demo/preview mode. Please configure SERVICE_ID and TEMPLATE_ID inside script.js.");
-      
-      if (confirmation) {
-        confirmation.textContent = "✅ Thank you! Your review was recorded successfully (Demo Mode).";
-        confirmation.style.color = "green";
-      }
-      
-      // Reset the form
-      reviewForm.reset();
-      selectedRating = 0;
-      if (ratingInput) ratingInput.value = 0;
-      stars.forEach(s => s.classList.remove('selected'));
-      
-      setTimeout(() => {
-        if (confirmation) confirmation.textContent = "";
-      }, 5000);
-      
-      return;
-    }
-    // Real EmailJS Send Trigger
+
+    // Matches your exact HTML field IDs from index.html
+    const userName = document.getElementById('review-author-name').value;
+    const userMessage = document.getElementById('review-text').value;
+
     if (confirmation) {
-      confirmation.textContent = "⌛ Sending your review...";
+      confirmation.textContent = "⌛ Posting your review...";
       confirmation.style.color = "var(--muted)";
     }
-    emailjs.sendForm(service_whe21va, template_gl2ceml, this)
-      .then(() => {
+
+    // Sends entry safely to the database table
+    const { data, error } = await supabase
+        .from('reviews')
+        .insert([{ name: userName, message: userMessage, rating: selectedRating }]);
+
+    if (error) {
+        alert("Error saving review: " + error.message);
+        if (confirmation) confirmation.textContent = "";
+    } else {
         if (confirmation) {
-          confirmation.textContent = "✅ Thank you! Your review was sent to our email.";
-          confirmation.style.color = "green";
+            confirmation.textContent = "✓ Thank you! Your review was recorded successfully.";
+            confirmation.style.color = "green";
         }
         
-        // Reset inputs
-        reviewForm.reset();
+        // Fully clears review elements out upon submission completion
+        targetReviewForm.reset();
         selectedRating = 0;
         if (ratingInput) ratingInput.value = 0;
         stars.forEach(s => s.classList.remove('selected'));
         
+        fetchReviews(); // Reloads active page content listing instantly
+        
         setTimeout(() => {
           if (confirmation) confirmation.textContent = "";
         }, 5000);
-      })
-      .catch(err => {
-        console.error("EmailJS send failed:", err);
-        if (confirmation) {
-          confirmation.textContent = "❌ Error sending review. Please try again.";
-          confirmation.style.color = "red";
-        }
-      });
+    }
   });
 }
-// review part
-// 1. Initialize your connection to Supabase
-const SUPABASE_URL = "https://cozynestapartment.netlify.app/";
-const SUPABASE_ANON_KEY = "sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj";
-const supabase = supabase.createClient(fziuukqerteghvxflbxz, sb_publishable_JiOarFwPQMJQlzWAt_4glQ_haQ6o-sj); 
-// 2. Select your HTML elements (Make sure these IDs match your HTML)
-const reviewForm = document.querySelector('form'); 
-const successMessage = document.querySelector('.text-success') || document.getElementById('success-banner');
 
-reviewForm.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Prevents the page from refreshing automatically
-    
-    // Grab the inputs the user typed in (Update these IDs to match your input fields)
-    const userName = document.getElementById('reviewer-name').value;
-    const userMessage = document.getElementById('reviewer-message').value;
-
-    // Send the data straight to your Supabase 'reviews' table
-    const { data, error } = await supabase
-        .from('reviews')
-        .insert([{ name: userName, message: userMessage }]);
-
-    if (error) {
-        alert("Error saving review: " + error.message);
-    } else {
-        // Change the green banner message to get rid of (Demo Mode)
-        if (successMessage) {
-            successMessage.innerHTML = "✓ Thank you! Your review was recorded successfully.";
-            successMessage.style.display = "block";
-        }
-        
-        reviewForm.reset(); // Clears the form text boxes
-        fetchReviews();     // Refresh the list on screen immediately
-    }
-});
-
-
-// 3. Load and display the reviews
+// 3. Pulls database inputs live to display on webpage layout
 async function fetchReviews() {
     const { data: reviews, error } = await supabase
         .from('reviews')
@@ -301,24 +366,31 @@ async function fetchReviews() {
         console.error("Error fetching reviews:", error);
         return;
     }
-
-    // Find the container element where reviews are listed on your webpage
-    const reviewsContainer = document.getElementById('reviews-display-area'); 
     if (!reviewsContainer) return;
     
-    reviewsContainer.innerHTML = ''; // Clear out any hardcoded template reviews
+    reviewsContainer.innerHTML = ''; // Wipes old layout placeholders
 
-    // Generate HTML for each review row in your database
     reviews.forEach(review => {
+        const starCount = review.rating ? review.rating : 5;
+        const generatedStars = "★".repeat(starCount) + "☆".repeat(5 - starCount);
+        
+        const reviewDate = review.created_at ? new Date(review.created_at).toLocaleDateString('en-US', {
+            month: 'long', day: 'numeric', year: 'numeric'
+        }) : "Just now";
+
         const reviewCard = `
-            <div class="review-item" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-                <strong>${review.name}</strong>
-                <p>"${review.message}"</p>
-            </div>
+            <article class="review-card">
+                <div class="review-header">
+                    <span class="review-author">${review.name}</span>
+                    <span class="review-stars" style="color: var(--gold);">${generatedStars}</span>
+                </div>
+                <p class="review-date">${reviewDate}</p>
+                <p class="review-text">"${review.message}"</p>
+            </article>
         `;
         reviewsContainer.insertAdjacentHTML('beforeend', reviewCard);
     });
 }
 
-// Automatically load existing reviews whenever someone opens the website
+// Loads existing active reviews when browser connects
 window.addEventListener('DOMContentLoaded', fetchReviews);
